@@ -16,11 +16,11 @@ export default function SpinningCube(props) {
               material = new THREE.MeshBasicMaterial({color: 0x00ff00}),
               cube = new THREE.Mesh(geometry, material);
               scene.add(cube);
-              camera.position.z = 5;
+              camera.position.z = 8;
         function gameLoop(){
             requestAnimationFrame(gameLoop);
-            cube.rotation.x += 0.03;
-            cube.rotation.y += 0.03;
+            cube.rotation.x += 0.02;
+            cube.rotation.y += 0.02;
             renderer.render(scene, camera);
         }
         gameLoop();
