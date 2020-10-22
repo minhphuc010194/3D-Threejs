@@ -1,10 +1,9 @@
-import React,{useRef, useEffect} from 'react';
+import React,{useRef, useEffect} from 'react'
 import * as THREE from 'three';
-// import three from 'three';
 
-export default function SpinningCube(props) {
+export default function ThreeDscene(props) {
     const {width, height} = props;
-    const anchor = useRef("anchor");
+    const anchor = useRef();
 
     useEffect(()=>{
         const scene = new THREE.Scene(),
@@ -16,7 +15,7 @@ export default function SpinningCube(props) {
               material = new THREE.MeshBasicMaterial({color: 0x00ff00}),
               cube = new THREE.Mesh(geometry, material);
               scene.add(cube);
-              camera.position.z = 5;
+              camera.position.z = 2;
         function gameLoop(){
             requestAnimationFrame(gameLoop);
             cube.rotation.x += 0.03;
@@ -26,6 +25,8 @@ export default function SpinningCube(props) {
         gameLoop();
     },[])
     return (
-        <div ref={anchor} style={{width, height, margin:"0 auto"}} />
+        <div ref={anchor} style={{width, height, margin: "0 auto"}}>
+        hai
+        </div>
     )
 }
