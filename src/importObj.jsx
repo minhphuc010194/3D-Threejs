@@ -12,7 +12,7 @@ export default function Importobj(props) {
         const scene = new THREE.Scene(),
         //create a new Prespective Camera
             camera = new THREE.PerspectiveCamera(75, width/height, 0.1, 2000);
-            camera.position.z = 2000;
+            camera.position.z = 200;
 
         // Create a Full Screen WebGL Renderer   
         const renderer = new THREE.WebGLRenderer({antialias: true, alpha: true});
@@ -32,7 +32,7 @@ export default function Importobj(props) {
 
         // Add a light
         let light = new THREE.PointLight(0xFFFFFF, 5, 1000);
-        light.position.set(0,150,1000);
+        light.position.set(0,500,500);
         scene.add(light);
         
 
@@ -40,36 +40,31 @@ export default function Importobj(props) {
 
         //Create a material
 
-        let mtlLoader = new OBJLoader();
-    
-        mtlLoader.load(require('./01Alocasia_obj.obj'), function (object){
-            scene.add(object); 
-            object.position.z = 0;
-            object.position.y = -500;
-            object.rotation.x = 0;
-            ourObj.current = object;
-            // material.preload();
-           
-            // Load the object
-            // let objLoader = new OBJLoader();
-            // objLoader.setMaterials(object);
-            // objLoader.load('01Alocasia_obj.mtl', function (object){
-            //     scene.add(object);
+        let mtlLoader = new MTLLoader();
+        mtlLoader.load(require('./IronMan.mtl'),function(materials){
+            materials.preload();
 
-            //     object.position.z -= 370;
-            //     object.rotation.x = 250;
-            // })
+            //Load the object
+            let objLoader = new OBJLoader();
+            objLoader.setMaterials(materials);
+            objLoader.load(require('./IronMan.obj'), function (object){
+                scene.add(object); 
+                object.position.z = 0;
+                object.position.y = -100;
+                object.rotation.x = 0;
+                ourObj.current = object;
+            })
+
         })
+
+        
         
         function render (){
             
             requestAnimationFrame(render);
             // Rotate the objects indefinitely
-            // ourObj.rotation.z -= .01;
-            // ourObj2.rotation.z += .03;
             if(ourObj.current&&ourObj.current.rotation){
                 ourObj.current.rotation.y += .03
-                // ourObj.current.rotation.y += .03
             }
             
             renderer.render(scene, camera);
