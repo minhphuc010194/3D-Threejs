@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import SpinningCube from './spinningcube';
-import ThreeDscene from './threedscene';
+// import ThreeDscene from './threedscene';
 
 function App() {
   return (
