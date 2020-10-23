@@ -8,7 +8,7 @@ function App() {
    <div className="App">
       3D with three js
       <SpinningCube width={800} height={600} />
-      <ThreeDscene width={800} height={600} />
+      {/* <ThreeDscene width={800} height={600} /> */}
    </div>
   );
 }

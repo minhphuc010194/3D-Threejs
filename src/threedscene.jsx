@@ -1,11 +1,13 @@
 import React,{useRef, useEffect} from 'react'
 import * as THREE from 'three';
 
+
 export default function ThreeDscene(props) {
     const {width, height} = props;
     const anchor = useRef();
 
     useEffect(()=>{
+        
         const scene = new THREE.Scene(),
             camera = new THREE.PerspectiveCamera(75, width/height, 0.1, 1000),
             renderer = new THREE.WebGLRenderer();
@@ -23,6 +25,11 @@ export default function ThreeDscene(props) {
             renderer.render(scene, camera);
         }
         gameLoop();
+        // let tl = new TimelineMax({paused: true});
+        // tl.to(cube.scale, 1, {x: 2, ease: Expo.easeOut});
+        // tl.to(cube.scale, .5, {x: .5, ease: Expo.easeOut});
+        // tl.to(cube.position, .5, {x: 2, ease: Expo.easeOut});
+        // tl.to(cube.rotation, .5, {y: Math.PI*.5, ease: Expo.easeOut})
     },[])
     return (
         <div ref={anchor} style={{width, height, margin: "0 auto"}}>
