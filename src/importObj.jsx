@@ -16,12 +16,8 @@ export default function Importobj(props) {
         const scene = new THREE.Scene(),
         //create a new Prespective Camera
             camera = new THREE.PerspectiveCamera(75, width/height, 0.1, 2000);
-<<<<<<< HEAD
-            camera.position.z =250;
-=======
             camera.position.z = 300;
             displaygui();
->>>>>>> 10b37de7c174407ae891f639ded990257a9a3a4c
 
         // Create a Full Screen WebGL Renderer   
         const renderer = new THREE.WebGLRenderer({antialias: true, alpha: true});
@@ -74,11 +70,11 @@ export default function Importobj(props) {
 
         })
 
-        let xro,yro, zro, speed_global;
+        let xro,yro, zro, speed_global = 0.01;
         function displaygui(){
             let gui = new GUI();
             let speed = 0.01;
-            let jar;
+            // let jar;
             let parameters ={
                 a: "Iron Man",
                 b: "",
@@ -146,7 +142,8 @@ export default function Importobj(props) {
             gui.open();
         }
         function spin(varname, xaxis, yaxis, zaxis){
-            let speed = 0.01;
+            console.log(speed_global)
+            let speed = speed_global;
             if(varname == true){
                 if(xaxis == true){ ourObj.current.rotation.x += speed}
                 else if(yaxis == true){ ourObj.current.rotation.y += speed}
