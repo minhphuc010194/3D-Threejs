@@ -2,6 +2,7 @@ import React,{useRef, useEffect} from 'react'
 import * as THREE from 'three';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
 import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader.js';
+import {TimelineMax, Expo} from 'gsap';
 
 export default function Importobj(props) {
     const {width, height} = props;
@@ -53,6 +54,9 @@ export default function Importobj(props) {
                 object.position.y = -100;
                 object.rotation.x = 0;
                 ourObj.current = object;
+
+                let tl = new TimelineMax();
+                tl.from(ourObj.current.scale, 2,{y: 0, x:0, z:0, ease: Expo.easeOut});
             })
 
         })
@@ -64,7 +68,8 @@ export default function Importobj(props) {
             requestAnimationFrame(render);
             // Rotate the objects indefinitely
             if(ourObj.current&&ourObj.current.rotation){
-                ourObj.current.rotation.y += .03
+                ourObj.current.rotation.y += .03 
+                // ourObj.current.rotation.z += .03
             }
             
             renderer.render(scene, camera);
