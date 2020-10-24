@@ -12,7 +12,7 @@ export default function Importobj(props) {
         const scene = new THREE.Scene(),
         //create a new Prespective Camera
             camera = new THREE.PerspectiveCamera(75, width/height, 0.1, 2000);
-            camera.position.z = 200;
+            camera.position.z =250;
 
         // Create a Full Screen WebGL Renderer   
         const renderer = new THREE.WebGLRenderer({antialias: true, alpha: true});
