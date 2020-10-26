@@ -69,12 +69,11 @@ export default function Importobj(props) {
             })
 
         })
-
-        let xro,yro, zro, speed_global = 0.01;
+        let xro,yro, zro, speed_global, effect_;
         function displaygui(){
             let gui = new GUI();
             let speed = 0.01;
-            // let jar;
+            let jar;
             let parameters ={
                 a: "Iron Man",
                 b: "",
@@ -87,6 +86,7 @@ export default function Importobj(props) {
                 n:"",
                 o:"",
                 sp:0.1,
+                ef:false
             }
             gui.add(parameters,'a').name('Name');
             gui.add(parameters,'b',["Cube","Sphere","Prism"]).name('Geomertry');
@@ -133,6 +133,9 @@ export default function Importobj(props) {
             yanim.onChange(function(jar){yro = jar});
             zanim.onChange(function(jar){zro = jar});
 
+            let effect_check = gui.add(parameters,'ef').name('Effect');
+            effect_check.onChange((e)=>{effect_=e});
+
             let speed_local = gui.add(parameters,'sp').min(0).max(10).step(speed).name('Speed');
             speed_local.onChange(function(jar){speed_global = jar});
 
@@ -142,30 +145,37 @@ export default function Importobj(props) {
             gui.open();
         }
         function spin(varname, xaxis, yaxis, zaxis){
-            console.log(speed_global)
-            let speed = speed_global;
+            let speed = 0.01;
             if(varname == true){
                 if(xaxis == true){ ourObj.current.rotation.x += speed}
                 else if(yaxis == true){ ourObj.current.rotation.y += speed}
                 else  ourObj.current.rotation.z += speed
             }
         }
+        
+        
         function render (){
+            
+            requestAnimationFrame(render);
             spin(xro, true, false, false);
             spin(yro, false, true, false);
             spin(zro, false, false, true);
-            requestAnimationFrame(render);
             // Rotate the objects indefinitely
             // if(ourObj.current&&ourObj.current.rotation){
-            //     ourObj.current.rotation.y += .03 
-            //     ourObj.current.rotation.z += .03
+            //     ourObj.current.rotation.y += .03
             // }
+            if(effect_){
+                effect.render(scene, camera);
+            }else{
+                renderer.render(scene, camera);
+            }
             
-            effect.render(scene, camera);
+               
         }
-        
+
         // Call this to render the entire scene
         render();
+        
 
         
     },[])
